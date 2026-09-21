@@ -1,0 +1,517 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Disharee Bhowmick</title>
+<meta name="description" content="Disharee Bhowmick — Machine Learning Engineer with 6+ years of experience in generative AI, predictive analytics, time-series and computer vision.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* ---------------------------------------------------------------
+   Tokens. Light is the base; dark redefines the same names twice —
+   once for the OS preference (guarded so an explicit light choice
+   still wins) and once for the toggle's stamp.
+   --------------------------------------------------------------- */
+:root{
+  --ground:#FBFCFD;
+  --surface:#FFFFFF;
+  --surface-2:#F1F4F8;
+  --ink:#0C1B2E;
+  --ink-2:#3D4F66;
+  --ink-3:#5A6B82;
+  --rule:#DDE4EC;
+  --rule-strong:#C3CFDD;
+  --accent:#B5501A;
+  --accent-soft:#F4E6DB;
+  --signal:#8FA2B8;
+
+  --f-display:"Archivo",-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  --f-body:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+
+  --measure:68ch;
+  --pad:clamp(1.25rem,5vw,3rem);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ground:#0A1220; --surface:#101B2D; --surface-2:#16233A;
+    --ink:#E8EDF4; --ink-2:#AFBECF; --ink-3:#8698AE;
+    --rule:#22314A; --rule-strong:#334562;
+    --accent:#E8823F; --accent-soft:#2A1D14; --signal:#546882;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#0A1220; --surface:#101B2D; --surface-2:#16233A;
+  --ink:#E8EDF4; --ink-2:#AFBECF; --ink-3:#8698AE;
+  --rule:#22314A; --rule-strong:#334562;
+  --accent:#E8823F; --accent-soft:#2A1D14; --signal:#546882;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--ground);color:var(--ink);
+  font-family:var(--f-body);font-size:16px;line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:var(--accent);text-decoration:none;border-bottom:1px solid transparent;transition:border-color .15s}
+a:hover{border-bottom-color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+img{max-width:100%;display:block}
+
+/* padding-inline only — a shorthand here would zero the block padding
+   that `section` and `.hero` set, since .wrap out-specifies them */
+.wrap{max-width:920px;margin:0 auto;padding-inline:var(--pad)}
+
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;line-height:1.15;letter-spacing:-.015em}
+h1{font-size:clamp(2.15rem,7vw,4rem);font-weight:700;letter-spacing:-.03em}
+h2{font-size:1.35rem;font-weight:600}
+h3{font-size:1.02rem;font-weight:600}
+p{margin:0}
+
+/* Divider: unequal blocks, the merged statistical windows from STaTS */
+.segbar{display:flex;gap:3px;height:4px}
+.segbar span{background:var(--rule);border-radius:1px}
+.segbar span:nth-child(3){background:var(--accent)}
+
+.topbar{
+  position:sticky;top:0;z-index:20;
+  background:var(--ground);
+  background:color-mix(in srgb,var(--ground) 88%,transparent);
+  backdrop-filter:blur(10px);border-bottom:1px solid var(--rule);
+}
+.topbar .wrap{display:flex;align-items:center;gap:1.5rem;height:56px}
+.topbar nav{display:flex;gap:1.25rem;margin-left:auto;flex-wrap:wrap}
+.topbar nav a{font-family:var(--f-mono);font-size:.78rem;color:var(--ink-2);border-bottom:1px solid transparent}
+.topbar nav a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+.brandmark{font-family:var(--f-mono);font-size:.78rem;color:var(--ink-3);letter-spacing:.08em}
+.themebtn{
+  background:none;border:1px solid var(--rule-strong);color:var(--ink-2);
+  font-family:var(--f-mono);font-size:.7rem;padding:.3rem .6rem;border-radius:3px;
+  cursor:pointer;letter-spacing:.06em;
+}
+.themebtn:hover{border-color:var(--accent);color:var(--accent)}
+
+.hero{padding-block:clamp(3rem,9vw,5.5rem) clamp(2rem,5vw,3rem)}
+.hero-grid{display:grid;grid-template-columns:1fr;gap:2.25rem}
+@media (min-width:760px){.hero-grid{grid-template-columns:minmax(0,1fr) 190px;align-items:start;gap:3rem}}
+.hero h1{margin-bottom:.55rem}
+.role{font-size:1.06rem;color:var(--ink-2);margin-bottom:1.4rem}
+.role strong{color:var(--ink);font-weight:600}
+.statement{max-width:var(--measure);color:var(--ink-2);font-size:1.02rem}
+.statement + .statement{margin-top:.9rem}
+
+.portrait{
+  position:relative;width:170px;height:170px;border-radius:50%;
+  display:grid;place-items:center;background:var(--surface-2);
+  border:1px solid var(--rule-strong);overflow:hidden;
+  font-family:var(--f-display);font-size:2.9rem;font-weight:600;color:var(--ink-3);
+}
+.portrait img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+
+.links{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.6rem}
+.chip{
+  display:inline-flex;align-items:center;font-family:var(--f-mono);font-size:.78rem;
+  padding:.4rem .7rem;border-radius:3px;border:1px solid var(--rule-strong);
+  color:var(--ink-2);background:var(--surface);
+}
+a.chip:hover{border-color:var(--accent);color:var(--accent)}
+.chip.primary{background:var(--ink);color:var(--ground);border-color:var(--ink)}
+a.chip.primary:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+.cvnote{font-family:var(--f-mono);font-size:.72rem;color:var(--ink-3);align-self:center}
+
+.signalbox{border:1px solid var(--rule);border-radius:4px;background:var(--surface);overflow:hidden;margin-top:2.75rem}
+.signalbox canvas{display:block;width:100%;height:118px}
+.signalcap{
+  display:flex;justify-content:space-between;gap:1rem;padding:.5rem .75rem;
+  border-top:1px solid var(--rule);font-family:var(--f-mono);font-size:.68rem;color:var(--ink-3);
+}
+
+section{padding-block:clamp(1.7rem,3.6vw,2.5rem)}
+.sechead{display:flex;align-items:baseline;gap:1rem;margin-bottom:1.75rem}
+.sechead h2{flex:none}
+.sechead .rule{flex:1;height:1px;background:var(--rule)}
+.sechead .count{font-family:var(--f-mono);font-size:.75rem;color:var(--ink-3)}
+
+.tags{display:flex;flex-wrap:wrap;gap:.45rem}
+.tag{font-family:var(--f-mono);font-size:.78rem;padding:.35rem .65rem;border-radius:3px;
+     background:var(--surface-2);color:var(--ink-2)}
+
+.news{list-style:none;padding:0;margin:0;display:flex;flex-direction:column}
+.news li{display:grid;grid-template-columns:5.5rem 1fr;gap:1rem;padding:.8rem 0;
+         border-top:1px solid var(--rule);align-items:baseline}
+.news li:last-child{border-bottom:1px solid var(--rule)}
+.news time{font-family:var(--f-mono);font-size:.78rem;color:var(--accent);font-variant-numeric:tabular-nums}
+.news p{color:var(--ink-2);font-size:.96rem}
+@media (max-width:520px){.news li{grid-template-columns:1fr;gap:.15rem}}
+
+.pubs{display:flex;flex-direction:column}
+.pub{padding:1.15rem 0;border-top:1px solid var(--rule)}
+.pub:last-child{border-bottom:1px solid var(--rule)}
+.pub h3{margin-bottom:.35rem;max-width:var(--measure)}
+.authors{font-size:.92rem;color:var(--ink-3);margin-bottom:.5rem;max-width:var(--measure)}
+.authors .me{color:var(--ink-2);font-weight:600}
+.venue{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem}
+.venue-tag{font-family:var(--f-mono);font-size:.72rem;padding:.2rem .5rem;border-radius:3px;
+           background:var(--accent-soft);color:var(--accent)}
+.venue-meta{font-family:var(--f-mono);font-size:.75rem;color:var(--ink-3)}
+.paperlinks{display:flex;flex-wrap:wrap;gap:.85rem;margin-top:.55rem}
+.paperlinks a{font-family:var(--f-mono);font-size:.74rem;color:var(--accent);border-bottom:1px solid var(--accent-soft)}
+.paperlinks a:hover{border-bottom-color:var(--accent)}
+
+.rows{display:flex;flex-direction:column}
+.row{display:grid;grid-template-columns:1fr auto;gap:.4rem 1.5rem;padding:.95rem 0;
+     border-top:1px solid var(--rule);align-items:baseline}
+.row:last-child{border-bottom:1px solid var(--rule)}
+.row .what{font-weight:600;font-size:.98rem}
+.row .where{grid-column:1;color:var(--ink-3);font-size:.9rem}
+.row .when{grid-row:1;grid-column:2;font-family:var(--f-mono);font-size:.76rem;color:var(--ink-3);
+           white-space:nowrap;font-variant-numeric:tabular-nums}
+.row .detail{grid-column:1/-1;color:var(--ink-2);font-size:.93rem;max-width:var(--measure)}
+.phases{grid-column:1/-1;display:flex;flex-direction:column;gap:.55rem;
+        margin-top:.6rem;max-width:var(--measure)}
+.ph{display:grid;grid-template-columns:9.5rem 1fr;gap:.9rem;
+    font-size:.92rem;color:var(--ink-2)}
+.ph-when{font-family:var(--f-mono);font-size:.71rem;color:var(--ink-3);
+         font-variant-numeric:tabular-nums;padding-top:.2rem}
+.ph strong{color:var(--ink);font-weight:600}
+@media (max-width:560px){.ph{grid-template-columns:1fr;gap:.1rem}}
+@media (max-width:560px){.row{grid-template-columns:1fr}.row .when{grid-row:auto;grid-column:1}}
+
+.honors{display:flex;flex-direction:column;gap:.85rem;max-width:var(--measure);padding:0;margin:0;list-style:none}
+.honors li{display:grid;grid-template-columns:auto 1fr;gap:.75rem;color:var(--ink-2);font-size:.96rem}
+.honors li::before{content:"";width:3px;border-radius:2px;background:var(--accent);opacity:.55}
+.honors strong{color:var(--ink);font-weight:600}
+
+footer{border-top:1px solid var(--rule);padding-block:2.5rem 3.5rem;margin-top:1.5rem}
+.foot{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;align-items:center}
+.foot p{font-family:var(--f-mono);font-size:.74rem;color:var(--ink-3)}
+
+@media (prefers-reduced-motion:reduce){*{animation-duration:.001ms !important;transition-duration:.001ms !important}}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <span class="brandmark">DB</span>
+    <nav>
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#publications">Publications</a>
+      <a href="#education">Education</a>
+      <a href="#honors">Awards</a>
+    </nav>
+    <button class="themebtn" id="themebtn" type="button" aria-label="Switch colour theme">THEME</button>
+  </div>
+</div>
+
+<main>
+
+<div class="wrap hero">
+  <div class="hero-grid">
+    <div>
+      <h1>Disharee Bhowmick</h1>
+      <p class="role">
+        <strong>Machine Learning Engineer</strong> · Generative AI · Data Science · Computer Vision
+      </p>
+      <p class="statement">
+        Machine learning professional with 6+ years of experience: nearly four years at
+        Cognizant Technology Solutions delivering data analytics, predictive modeling and
+        generative AI for enterprise financial-services clients, followed by three years at
+        Auburn University (USA) as a machine learning engineer and technical instructor.
+      </p>
+      <p class="statement">
+        Built Retrieval-Augmented Generation pipelines and fine-tuned large language models for
+        enterprise workflows, cut recurring IT incidents by 25%, and designed a time-series
+        compression framework that shrinks model input up to 30x while keeping 85–90% of accuracy.
+        M.S. in Computer Science (USA), GPA 3.83.
+      </p>
+
+      <div class="links">
+        <a class="chip primary" id="cv" href="Disharee_Bhowmick_CV.pdf">CV (PDF)</a>
+        <a class="chip" href="mailto:dzb0110@auburn.edu">dzb0110@auburn.edu</a>
+        <a class="chip" href="https://www.linkedin.com/in/disharee-bhowmick-108b62161/">LinkedIn</a>
+        <a class="chip" href="https://github.com/Dzb0110">GitHub</a>
+      </div>
+    </div>
+
+    <div>
+      <div class="portrait">DB<img src="photo.jpg"
+        alt="Disharee Bhowmick" onerror="this.remove()"></div>
+    </div>
+  </div>
+
+  <div class="signalbox">
+    <canvas id="sig" width="1600" height="236" aria-hidden="true"></canvas>
+    <div class="signalcap">
+      <span>raw temporal sequence</span>
+      <span>&rarr; structure-aware window merging &rarr;</span>
+      <span>compressed segments</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap"><div class="segbar" aria-hidden="true">
+  <span style="flex:2"></span><span style="flex:5"></span><span style="flex:1"></span>
+  <span style="flex:8"></span><span style="flex:3"></span></div></div>
+
+<section id="experience" class="wrap">
+  <div class="sechead"><h2>Professional experience</h2><span class="rule"></span></div>
+  <div class="rows">
+    <div class="row">
+      <span class="what">Associate — Software Engineer &rarr; Data Analyst &rarr; ML Engineer</span>
+      <span class="when">Sep 2019 – Jun 2023</span>
+      <span class="where">Cognizant Technology Solutions · Pune, India</span>
+      <span class="detail">Delivered data analytics, machine learning and generative AI solutions
+        for enterprise financial-services clients.</span>
+      <div class="phases">
+        <div class="ph"><span class="ph-when">Mar 2022 – Jun 2023</span>
+          <span><strong>Generative AI</strong> — built and deployed LLM solutions in
+          financial-services client workflows across Azure, AWS and GCP; designed
+          Retrieval-Augmented Generation (RAG) pipelines grounding answers in enterprise
+          knowledge bases to improve accuracy and reduce hallucinations; fine-tuned and
+          benchmarked pre-trained LLMs on domain-specific data; took solutions from
+          prototype to deployment with client and delivery teams.</span></div>
+        <div class="ph"><span class="ph-when">Mar 2021 – Feb 2022</span>
+          <span><strong>Machine Learning</strong> — led an internal predictive-analytics
+          project, owning model selection and benchmarking of supervised models, including
+          gradient boosting, in Python, SQL and scikit-learn; standardized preprocessing,
+          feature engineering and validation into a repeatable workflow.</span></div>
+        <div class="ph"><span class="ph-when">Mar 2020 – Feb 2021</span>
+          <span><strong>Data Analytics</strong> — reduced recurring IT incident volume by
+          <strong>25%</strong> through root-cause analysis with operations teams; built
+          Power BI and Tableau dashboards on SQL-queried incident data for enterprise clients.</span></div>
+        <div class="ph"><span class="ph-when">Sep 2019 – Feb 2020</span>
+          <span><strong>Analytics training</strong> — six-month structured program in
+          exploratory data analysis, statistical methods and data preprocessing.</span></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <span class="what">Machine Learning Engineer (Research Assistant)</span>
+      <span class="when">May 2024 – present</span>
+      <span class="where">Department of Computer Science &amp; Software Engineering, Auburn University, USA</span>
+      <span class="detail">Applied ML engineering on computer vision, time-series and multimodal AI.
+        Began as a graduate research assistant during the M.S. and continued full-time after
+        graduating in May 2025.</span>
+      <div class="phases">
+        <div class="ph"><span class="ph-when">Time series</span>
+          <span><strong>STaTS</strong> — designed an unsupervised framework that compresses
+          time-series data with BIC-based multi-scale change detection, cutting model input by
+          <strong>up to 30x</strong> while keeping <strong>85–90%</strong> of full-resolution
+          accuracy; validated on 150+ benchmark datasets (UCR, UEA, ETT) in Python and PyTorch.</span></div>
+        <div class="ph"><span class="ph-when">Vision &amp; LLMs</span>
+          <span><strong>Vision-language models &amp; video analytics</strong> — building pipelines
+          that adapt VLMs for open-world event segmentation; contributed to CVT-Bench, a robustness
+          benchmark for multimodal LLMs, and to a video-based livestock respiration monitoring system.</span></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <span class="what">Graduate Teaching Assistant — Technical Training &amp; Instruction</span>
+      <span class="when">Aug 2023 – May 2025</span>
+      <span class="where">Samuel Ginn College of Engineering, Auburn University, USA</span>
+      <span class="detail">Lead Teaching Assistant for Introduction to Algorithms (COMP 3270),
+        coordinating the TA team and assessment workflows; Teaching Assistant for Formal Languages
+        (COMP 4200); Lab Instructor for Introduction to Engineering (ENGR 1110).</span>
+    </div>
+
+    <div class="row">
+      <span class="what">Software Development Intern</span>
+      <span class="when">Jul – Aug 2018</span>
+      <span class="where">Ogma Tech Lab · Kolkata, India</span>
+      <span class="detail">Built the "Puja Parikrama" Android app with Android Studio and Firebase.</span>
+    </div>
+  </div>
+</section>
+
+<section id="skills" class="wrap">
+  <div class="sechead"><h2>Skills</h2><span class="rule"></span></div>
+  <div class="tags">
+    <span class="tag">Large language models</span>
+    <span class="tag">RAG</span>
+    <span class="tag">LLM fine-tuning</span>
+    <span class="tag">Python</span>
+    <span class="tag">SQL</span>
+    <span class="tag">scikit-learn</span>
+    <span class="tag">PyTorch</span>
+    <span class="tag">TensorFlow</span>
+    <span class="tag">Gradient boosting</span>
+    <span class="tag">Time-series forecasting</span>
+    <span class="tag">Computer vision</span>
+    <span class="tag">Vision-language models</span>
+    <span class="tag">Azure</span>
+    <span class="tag">AWS</span>
+    <span class="tag">GCP</span>
+    <span class="tag">Power BI</span>
+    <span class="tag">Tableau</span>
+  </div>
+</section>
+
+<div class="wrap"><div class="segbar" aria-hidden="true">
+  <span style="flex:6"></span><span style="flex:2"></span><span style="flex:4"></span>
+  <span style="flex:1"></span><span style="flex:5"></span></div></div>
+<section id="publications" class="wrap">
+  <div class="sechead"><h2>Publications</h2><span class="rule"></span><span class="count">2</span></div>
+  <div class="pubs">
+    <article class="pub">
+      <h3>STaTS: Structure-aware temporal sequence summarization via statistical window merging</h3>
+      <p class="authors"><span class="me">Disharee Bhowmick</span>, Ranjith Ramanathan, Sathyanarayanan N. Aakur</p>
+      <div class="venue">
+        <span class="venue-tag">Pattern Recognition Letters</span>
+        <span class="venue-meta">Vol. 202, pp. 135–140 · 2026</span>
+      </div>
+      <div class="paperlinks">
+        <a href="https://www.sciencedirect.com/science/article/abs/pii/S0167865526000619">Journal&nbsp;&rarr;</a>
+        <a href="https://arxiv.org/abs/2510.09593">arXiv&nbsp;&rarr;</a>
+        <a href="https://github.com/Dzb0110/STaTS">Code&nbsp;&rarr;</a>
+      </div>
+    </article>
+    <article class="pub">
+      <h3>Vision-Based Livestock Respiratory Monitoring for Smart Agriculture Sensing Systems</h3>
+      <p class="authors">Revanth Reddy Palem, Mariana E. Garcia-Ascolani,
+        <span class="me">Disharee Bhowmick</span>, David Lalman, Ranjith Ramanathan,
+        Sathyanarayanan N. Aakur</p>
+      <div class="venue">
+        <span class="venue-tag">IEEE MWSCAS</span><span class="venue-meta">2026</span>
+      </div>
+    </article>
+  </div>
+
+  <div class="sechead" style="margin-top:2.75rem"><h2>Preprints</h2><span class="rule"></span><span class="count">2</span></div>
+  <div class="pubs">
+    <article class="pub">
+      <h3>CVT-Bench: Counterfactual Viewpoint Transformations Reveal Unstable Spatial Representations in Multimodal LLMs</h3>
+      <p class="authors">Shanmukha Vellamcheti, Uday Kiran Kothapalli,
+        <span class="me">Disharee Bhowmick</span>, Sathyanarayanan N. Aakur</p>
+      <div class="venue">
+        <span class="venue-tag">arXiv</span><span class="venue-meta">arXiv:2603.21114 · 2026</span>
+      </div>
+      <div class="paperlinks">
+        <a href="https://arxiv.org/abs/2603.21114">arXiv&nbsp;&rarr;</a>
+        <a href="https://shanmukha-here.github.io/CVT-Bench/">Project&nbsp;page&nbsp;&rarr;</a>
+      </div>
+    </article>
+    <article class="pub">
+      <h3>Physiological Signal-Aware Livestock Respiration Estimation from Video</h3>
+      <p class="authors">Revanth Reddy Palem, <span class="me">Disharee Bhowmick</span>,
+        Mariana E. Garcia-Ascolani, David L. Lalman, Ranjith Ramanathan, Sathyanarayanan N. Aakur</p>
+      <div class="venue"><span class="venue-meta">2026</span></div>
+    </article>
+  </div>
+</section>
+
+<div class="wrap"><div class="segbar" aria-hidden="true">
+  <span style="flex:1"></span><span style="flex:4"></span><span style="flex:3"></span>
+  <span style="flex:9"></span><span style="flex:2"></span></div></div>
+
+<section id="education" class="wrap">
+  <div class="sechead"><h2>Education</h2><span class="rule"></span></div>
+  <div class="rows">
+    <div class="row"><span class="what">M.S., Computer Science</span><span class="when">Aug 2023 – May 2025</span>
+      <span class="where">Auburn University, Alabama, USA · GPA 3.83</span></div>
+    <div class="row"><span class="what">B.Tech., Computer Science</span><span class="when">Aug 2015 – Jul 2019</span>
+      <span class="where">University of Engineering and Management, Kolkata · GPA 3.6</span></div>
+  </div>
+</section>
+
+<section id="honors" class="wrap">
+  <div class="sechead"><h2>Awards</h2><span class="rule"></span></div>
+  <ul class="honors">
+    <li><span><strong>100+ Women Strong Outstanding Departmental Annual Graduate Award</strong>
+      (2026), Samuel Ginn College of Engineering — one of two graduate honorees in Computer
+      Science and Software Engineering. Award value: $2,000.</span></li>
+    <li><span>Auburn University's only CSSE nominee for the <strong>ACM SIGHPC Fellowship</strong>.</span></li>
+    <li><span><strong>Rising Star Award</strong> for project delivery, Cognizant Technology Solutions.</span></li>
+    <li><span><strong>Star of the Month</strong>, awarded multiple times at Cognizant.</span></li>
+  </ul>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <p>Auburn, Alabama · dzb0110@auburn.edu</p>
+    <p>Updated September 2026</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var root=document.documentElement, btn=document.getElementById('themebtn'), stored=null;
+  try{stored=localStorage.getItem('db-theme');}catch(e){}
+  if(stored==='light'||stored==='dark') root.setAttribute('data-theme',stored);
+  function label(){
+    var t=root.getAttribute('data-theme');
+    btn.textContent = t==='dark' ? 'DARK' : (t==='light' ? 'LIGHT' : 'AUTO');
+  }
+  label();
+  btn.addEventListener('click',function(){
+    var next = root.getAttribute('data-theme')==='dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme',next);
+    try{localStorage.setItem('db-theme',next);}catch(e){}
+    label(); draw();
+  });
+})();
+
+/* Hero: a piecewise-stationary signal on the left, its merged segments on the
+   right. Fixed seed, so it draws identically on every load. */
+var cv=document.getElementById('sig');
+function draw(){
+  if(!cv) return;
+  var ctx=cv.getContext('2d'), W=cv.width, H=cv.height;
+  var cs=getComputedStyle(document.documentElement);
+  var signal=cs.getPropertyValue('--signal').trim(),
+      accent=cs.getPropertyValue('--accent').trim(),
+      rule=cs.getPropertyValue('--rule').trim();
+  ctx.clearRect(0,0,W,H);
+
+  var s=20260827;
+  function rnd(){ s=(s*16807)%2147483647; return s/2147483647; }
+
+  var N=260, pad=28, usable=W-pad*2;
+  var cps=[0,34,71,96,148,171,214,260];
+  var levels=[0.46,0.72,0.30,0.58,0.38,0.80,0.52];
+  var vals=[], seg=0;
+  for(var i=0;i<N;i++){
+    if(seg<cps.length-2 && i>=cps[seg+1]) seg++;
+    vals.push(levels[seg]+(rnd()-0.5)*0.16);
+  }
+
+  var rawW=usable*0.52;
+  ctx.strokeStyle=signal; ctx.lineWidth=1.4; ctx.lineJoin='round'; ctx.beginPath();
+  for(var j=0;j<N;j++){
+    var x=pad+(j/(N-1))*rawW, y=H-24-vals[j]*(H-58);
+    j?ctx.lineTo(x,y):ctx.moveTo(x,y);
+  }
+  ctx.stroke();
+
+  var gapA=pad+rawW+18, gapB=pad+usable*0.62;
+  ctx.strokeStyle=rule; ctx.lineWidth=1;
+  ctx.beginPath(); ctx.moveTo(gapA,H/2); ctx.lineTo(gapB,H/2); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(gapB-7,H/2-5); ctx.lineTo(gapB,H/2); ctx.lineTo(gapB-7,H/2+5); ctx.stroke();
+
+  var segX=pad+usable*0.66, segW=usable-(segX-pad), total=cps[cps.length-1];
+  for(var k=0;k<levels.length;k++){
+    var x0=segX+(cps[k]/total)*segW, x1=segX+(cps[k+1]/total)*segW;
+    var y=H-24-levels[k]*(H-58);
+    ctx.fillStyle=(k===3)?accent:signal;
+    ctx.globalAlpha=(k===3)?0.95:0.5;
+    ctx.fillRect(x0+1.5,y,Math.max(2,(x1-x0)-3),H-24-y);
+  }
+  ctx.globalAlpha=1;
+  ctx.strokeStyle=rule; ctx.lineWidth=1;
+  ctx.beginPath(); ctx.moveTo(pad,H-24); ctx.lineTo(W-pad,H-24); ctx.stroke();
+}
+draw();
+window.addEventListener('resize',draw);
+if(window.matchMedia){
+  var mq=window.matchMedia('(prefers-color-scheme: dark)');
+  if(mq.addEventListener) mq.addEventListener('change',draw);
+}
+</script>
+</body>
+</html>
