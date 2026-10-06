@@ -313,21 +313,21 @@ footer{border-top:1px solid var(--rule);padding-block:2.5rem 3.5rem;margin-top:1
         <div class="ph"><span class="ph-when">Mar 2022 – Jun 2023</span>
           <div class="proj">
             <span><strong>Generative AI</strong> — AI-Powered IT Incident Support &amp; Runbook Assistant</span>
-            <div class="tags">Python · FastAPI · ServiceNow · Snowflake · Vector DB · BM25 · Semantic search · RAG · Azure OpenAI · AWS SageMaker · Docker · CI/CD</div>
-            <p class="problem"><em>Business problem.</em> L1/L2 support analysts often needed senior SMEs to understand incidents, find similar historical incidents, locate the right SOPs and runbooks, and decide the next troubleshooting steps. The assistant brings those sources together and gives a grounded recommendation.</p>
+            <div class="tags">Python · FastAPI · ServiceNow · Snowflake · Chroma · BM25 · Semantic search · RAG · Azure OpenAI (GPT-3.5) · Docker · Git-based CI/CD</div>
+            <p class="problem"><em>Business problem.</em> L1/L2 support analysts often needed senior SMEs to understand incidents, find similar historical incidents, locate the right SOPs and runbooks, and decide the next troubleshooting steps. The assistant brings those sources together and gives a grounded recommendation. The project was still in progress when I left the team in June 2023.</p>
             <ul class="pts">
-              <li>Designed a GenAI-based support assistant to help L1/L2 analysts investigate IT incidents by combining live ServiceNow incident data, historical incidents in Snowflake, and SOPs/knowledge documents stored in a vector database.</li>
+              <li>Built the support-analyst side of a GenAI assistant that helps L1/L2 analysts investigate IT incidents by combining live ServiceNow incident data, 30–40K historical incidents, tasks and KB articles from Snowflake, and SOPs/runbooks indexed in Chroma.</li>
               <li>Built Python APIs to retrieve live incident details such as priority, description, assignment group, owner and status, then combine them with similar historical incidents and relevant operational documentation.</li>
-              <li>Implemented hybrid retrieval using BM25 keyword search and semantic embeddings to identify relevant incidents, knowledge articles, SOPs and runbooks before passing context to the LLM.</li>
-              <li>Developed a RAG-based solution using GPT models through Azure OpenAI and open-source LLMs on AWS SageMaker, with prompts designed to generate structured troubleshooting guidance grounded in retrieved enterprise sources.</li>
+              <li>Implemented hybrid retrieval, with BM25 keyword search for exact terms such as error codes, hostnames and KB IDs and Chroma vector search for paraphrased descriptions, to identify relevant incidents, knowledge articles, SOPs and runbooks before passing context to the LLM.</li>
+              <li>Developed a RAG layer on GPT-3.5 through Azure OpenAI, with prompts restricted to the retrieved sources and designed to generate structured troubleshooting guidance grounded in retrieved enterprise sources.</li>
               <li>Built a Support Analyst workflow supporting both incident-number based investigation and free-text problem descriptions, returning recommended investigation steps, similar incidents and supporting documentation.</li>
               <li>Developed a Runbook Generator to transform unstructured operational documentation into standardized troubleshooting procedures containing symptoms, prerequisites, diagnostic steps, remediation and escalation criteria.</li>
               <li>Added source references and confidence handling so analysts could distinguish retrieved evidence from model-generated recommendations, with low-confidence cases routed for human/SME review.</li>
-              <li>Containerized the application with Docker and implemented Git-based CI/CD with automated testing and staged deployment; added logging for queries, retrieved sources, latency, errors and low-quality responses.</li>
+              <li>Containerized the FastAPI service with Docker and worked with a DevOps teammate on Git-based CI/CD with automated tests ahead of deployment; logged queries, retrieved sources, latency and errors during testing. SMEs and tower leads validated the results.</li>
             </ul>
             <details class="arch">
               <summary>Architecture &amp; example output</summary>
-              <div class="flow" role="img" aria-label="Architecture: analyst query goes to a Python API, which pulls the live ServiceNow incident, runs hybrid retrieval over historical incidents in Snowflake and SOPs in a vector database, sends the evidence to the LLM, and returns a structured answer with evidence and steps.">
+              <div class="flow" role="img" aria-label="Architecture: analyst query goes to a Python API, which pulls the live ServiceNow incident, runs hybrid retrieval over historical incidents from Snowflake and SOPs in Chroma, sends the evidence to the LLM, and returns a structured answer with evidence and steps.">
                 <div class="node">Support analyst<small>Incident # or free-text query</small></div>
                 <div class="arr" aria-hidden="true"></div>
                 <div class="node">Python API<small>FastAPI</small></div>
@@ -335,10 +335,10 @@ footer{border-top:1px solid var(--rule);padding-block:2.5rem 3.5rem;margin-top:1
                 <div class="node">ServiceNow<small>Live incident → builds the search query</small></div>
                 <div class="arr" aria-hidden="true"></div>
                 <div class="node wide">Hybrid retrieval<small>BM25 + embeddings</small>
-                  <div class="srcs"><span>Snowflake<small>Historical incidents</small></span><span>Vector DB<small>SOPs · KB · runbooks</small></span></div>
+                  <div class="srcs"><span>Snowflake<small>Historical incidents</small></span><span>Chroma<small>SOPs · KB · runbooks</small></span></div>
                 </div>
                 <div class="arr" aria-hidden="true"></div>
-                <div class="node">LLM / RAG<small>GPT on Azure OpenAI · LLMs on SageMaker</small></div>
+                <div class="node">LLM / RAG<small>GPT-3.5 on Azure OpenAI</small></div>
                 <div class="arr" aria-hidden="true"></div>
                 <div class="node accent">Structured answer<small>Evidence + steps + confidence · low confidence → SME review</small></div>
               </div>
