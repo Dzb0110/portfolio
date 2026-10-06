@@ -314,28 +314,28 @@ footer{border-top:1px solid var(--rule);padding-block:2.5rem 3.5rem;margin-top:1
           <div class="proj">
             <span><strong>Generative AI</strong> — AI-Powered IT Incident Support &amp; Runbook Assistant</span>
             <div class="tags">Python · FastAPI · ServiceNow · Snowflake · Chroma · BM25 · Semantic search · RAG · Azure OpenAI (GPT-3.5) · Docker · Git-based CI/CD</div>
-            <p class="problem"><em>Business problem.</em> L1/L2 support analysts often needed senior SMEs to understand incidents, find similar historical incidents, locate the right SOPs and runbooks, and decide the next troubleshooting steps. The assistant brings those sources together and gives a grounded recommendation. The project was still in progress when I left the team in June 2023.</p>
+            <p class="problem"><em>Business problem.</em> L1/L2 support analysts often needed senior SMEs to understand incidents, find similar historical incidents, locate the right SOPs and runbooks, and decide the next troubleshooting steps. The assistant brings those sources together and gives a grounded recommendation. The work was phased: ServiceNow integration, Snowflake loading and BM25 keyword search came first and were in use by analysts; semantic search was added in March 2023 and the GPT-3.5 RAG layer in April–June 2023. The project was still in progress when I left the team in June 2023.</p>
             <ul class="pts">
-              <li>Built the support-analyst side of a GenAI assistant that helps L1/L2 analysts investigate IT incidents by combining live ServiceNow incident data, 30–40K historical incidents, tasks and KB articles from Snowflake, and SOPs/runbooks indexed in Chroma.</li>
+              <li>Built the support-analyst side of a GenAI assistant that helps L1/L2 analysts investigate IT incidents by combining live ServiceNow incident data with a search index over 30–40K historical incidents, tasks and KB articles (loaded from ServiceNow into Snowflake) and SOPs/runbooks.</li>
               <li>Built Python APIs to retrieve live incident details such as priority, description, assignment group, owner and status, then combine them with similar historical incidents and relevant operational documentation.</li>
-              <li>Implemented hybrid retrieval, with BM25 keyword search for exact terms such as error codes, hostnames and KB IDs and Chroma vector search for paraphrased descriptions, to identify relevant incidents, knowledge articles, SOPs and runbooks before passing context to the LLM.</li>
-              <li>Developed a RAG layer on GPT-3.5 through Azure OpenAI, with prompts restricted to the retrieved sources and designed to generate structured troubleshooting guidance grounded in retrieved enterprise sources.</li>
+              <li>Implemented hybrid retrieval over the chunked and embedded records and documents, with BM25 keyword search for exact terms such as error codes, hostnames and KB IDs and Chroma vector search for paraphrased descriptions, to identify relevant incidents, knowledge articles, SOPs and runbooks before passing context to the LLM.</li>
+              <li>Developed a RAG layer on GPT-3.5 (gpt-35-turbo) through Azure OpenAI, with prompts restricted to the retrieved sources and designed to generate structured troubleshooting guidance.</li>
               <li>Built a Support Analyst workflow supporting both incident-number based investigation and free-text problem descriptions, returning recommended investigation steps, similar incidents and supporting documentation.</li>
-              <li>Developed a Runbook Generator to transform unstructured operational documentation into standardized troubleshooting procedures containing symptoms, prerequisites, diagnostic steps, remediation and escalation criteria.</li>
+              <li>Developed a Runbook Generator to transform unstructured SOPs into standardized troubleshooting procedures containing symptoms, prerequisites, diagnostic steps, remediation and escalation criteria; long documents were processed section by section and reviewed by an SME.</li>
               <li>Added source references and confidence handling so analysts could distinguish retrieved evidence from model-generated recommendations, with low-confidence cases routed for human/SME review.</li>
-              <li>Containerized the FastAPI service with Docker and worked with a DevOps teammate on Git-based CI/CD with automated tests ahead of deployment; logged queries, retrieved sources, latency and errors during testing. SMEs and tower leads validated the results.</li>
+              <li>Worked with a DevOps teammate to release the Dockerized FastAPI service through Git-based CI/CD with automated tests and staged deployment; logged queries, retrieved sources, latency, errors and low-quality responses. SMEs and tower leads validated the results.</li>
             </ul>
             <details class="arch">
               <summary>Architecture &amp; example output</summary>
-              <div class="flow" role="img" aria-label="Architecture: analyst query goes to a Python API, which pulls the live ServiceNow incident, runs hybrid retrieval over historical incidents from Snowflake and SOPs in Chroma, sends the evidence to the LLM, and returns a structured answer with evidence and steps.">
+              <div class="flow" role="img" aria-label="Architecture: analyst query goes to a Python API, which pulls the live ServiceNow incident, runs hybrid BM25 and Chroma retrieval over an index of historical records loaded from Snowflake plus SOPs, KB articles and runbooks, sends the evidence to GPT-3.5 on Azure OpenAI, and returns a structured answer with evidence and steps.">
                 <div class="node">Support analyst<small>Incident # or free-text query</small></div>
                 <div class="arr" aria-hidden="true"></div>
                 <div class="node">Python API<small>FastAPI</small></div>
                 <div class="arr" aria-hidden="true"></div>
                 <div class="node">ServiceNow<small>Live incident → builds the search query</small></div>
                 <div class="arr" aria-hidden="true"></div>
-                <div class="node wide">Hybrid retrieval<small>BM25 + embeddings</small>
-                  <div class="srcs"><span>Snowflake<small>Historical incidents</small></span><span>Chroma<small>SOPs · KB · runbooks</small></span></div>
+                <div class="node wide">Hybrid retrieval<small>Historical records (via Snowflake) · SOPs · KB · runbooks</small>
+                  <div class="srcs"><span>BM25<small>Exact terms: error codes, hostnames, KB IDs</small></span><span>Chroma<small>Vector search: paraphrased descriptions</small></span></div>
                 </div>
                 <div class="arr" aria-hidden="true"></div>
                 <div class="node">LLM / RAG<small>GPT-3.5 on Azure OpenAI</small></div>
@@ -369,7 +369,7 @@ Recommended investigation:
 Confidence: High
 
 Sources: INC0098765 · DB-104 · DB Connection Pool Troubleshooting SOP</pre>
-              <p class="note">The model does not invent fixes: every recommended step is tied to a retrieved incident, SOP or knowledge article, and anything without enough evidence is flagged for SME review.</p>
+              <p class="note">The prompt restricts the model to the retrieved evidence, so each recommended step is meant to trace back to a retrieved incident, SOP or knowledge article; answers without enough evidence are marked low confidence and flagged for SME review.</p>
             </details>
           </div>
         </div>
